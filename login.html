@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FROSTBITE | Research Desk Access</title>
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            obsidian: '#0B0B0B',
+            surface: {
+              charcoal: '#141311',
+              card: '#181818',
+              elevated: '#201F1C',
+              subtle: '#272622'
+            },
+            champagne: {
+              DEFAULT: '#C6A76B',
+              light: '#E5C378',
+              dim: '#A38750',
+              faint: 'rgba(198, 167, 107, 0.12)'
+            },
+            ivory: {
+              DEFAULT: '#F4EFE6',
+              dim: '#DCD6CB',
+              muted: '#A5A096'
+            },
+            stone: {
+              DEFAULT: '#77736B',
+              light: '#948F85',
+              dark: '#3A3834'
+            },
+            sage: {
+              DEFAULT: '#718574',
+              bright: '#4E9B6A',
+              faint: 'rgba(113, 133, 116, 0.16)'
+            },
+            crimson: {
+              DEFAULT: '#9C4F4F',
+              bright: '#D9534F',
+              faint: 'rgba(156, 79, 79, 0.16)'
+            }
+          },
+          fontFamily: {
+            display: ['"Syne"', 'sans-serif'],
+            sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #0B0B0B; }
+    ::-webkit-scrollbar-thumb { background: #2A2825; border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: #C6A76B; }
+
+    /* Entrance animations */
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    .anim-fade-up {
+      animation: fadeSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      opacity: 0;
+    }
+    .anim-fade-up-delay-1 { animation-delay: 0.15s; }
+    .anim-fade-up-delay-2 { animation-delay: 0.30s; }
+    .anim-fade-up-delay-3 { animation-delay: 0.45s; }
+    .anim-fade-up-delay-4 { animation-delay: 0.60s; }
+    .anim-fade-in {
+      animation: fadeIn 1.2s ease forwards;
+      opacity: 0;
+    }
+
+    .gold-shimmer {
+      background: linear-gradient(90deg, #C6A76B 0%, #E5C378 40%, #C6A76B 60%, #A38750 100%);
+      background-size: 200% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 3s ease-in-out infinite;
+    }
+
+    /* Focus ring override */
+    input:focus {
+      outline: none;
+      border-color: #C6A76B !important;
+      box-shadow: 0 0 0 2px rgba(198, 167, 107, 0.25);
+    }
+
+    /* Pill button */
+    .pill-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.375rem;
+      border-radius: 9999px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body class="bg-obsidian text-ivory font-sans antialiased selection:bg-champagne selection:text-obsidian min-h-screen overflow-x-hidden">
+
+  <div class="flex flex-col lg:flex-row min-h-screen">
+
+    <!-- ======================================================== -->
+    <!-- LEFT: MOLTEN GOLD ATMOSPHERIC BACKGROUND                 -->
+    <!-- ======================================================== -->
+    <div class="hidden lg:flex lg:w-[55%] relative overflow-hidden anim-fade-in">
+      <!-- Full-Bleed Gold Smelting Image -->
+      <img src="images/molten_gold.jpg" alt="Molten Gold Refinery" class="absolute inset-0 w-full h-full object-cover object-center filter brightness-[0.72] contrast-[1.15] scale-105" />
+      
+      <!-- Gradient Overlays -->
+      <div class="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-obsidian/95"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/40"></div>
+
+      <!-- Bottom-Left Brand & Context Block -->
+      <div class="absolute bottom-0 left-0 right-0 p-8 sm:p-12 z-10">
+        <div class="anim-fade-up anim-fade-up-delay-2">
+          <div class="flex items-center gap-2 mb-4">
+            <span class="w-1.5 h-1.5 rounded-full bg-champagne animate-pulse"></span>
+            <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-champagne-light">
+              Quantitative Commodity Intelligence
+            </span>
+          </div>
+          <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-white leading-tight max-w-md drop-shadow-lg">
+            Where Purity Meets Precision.
+          </h2>
+          <p class="text-xs sm:text-sm text-ivory-dim font-light mt-3 max-w-sm leading-relaxed drop-shadow">
+            Isolating hidden basis spreads across MCX Gold futures through deterministic normalization and cost-aware friction audits.
+          </p>
+
+          <!-- Live Stats -->
+          <div class="flex items-center gap-6 mt-6 text-[10.5px] font-mono text-stone-light">
+            <div>
+              <span class="text-stone">BENCHMARK:</span>
+              <span class="text-champagne font-medium ml-1">₹72,791.46 / 10g</span>
+            </div>
+            <div>
+              <span class="text-stone">SPREAD:</span>
+              <span class="text-sage font-medium ml-1">-₹171.57 (-1.85σ)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Top-Left Pill -->
+      <div class="absolute top-8 left-8 z-10 anim-fade-up anim-fade-up-delay-1">
+        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-champagne/30 text-[10px] font-mono uppercase tracking-widest text-champagne-light">
+          MCX Bullion Series
+        </span>
+      </div>
+    </div>
+
+
+    <!-- ======================================================== -->
+    <!-- RIGHT: LOGIN / REGISTER FORM                             -->
+    <!-- ======================================================== -->
+    <div class="w-full lg:w-[45%] flex flex-col justify-center items-center px-6 sm:px-12 lg:px-16 py-12 relative">
+      
+      <!-- Mobile-only background (shows molten gold faintly on small screens) -->
+      <div class="absolute inset-0 lg:hidden z-0">
+        <img src="images/molten_gold.jpg" alt="" class="w-full h-full object-cover filter brightness-[0.20] contrast-[1.1]" />
+        <div class="absolute inset-0 bg-obsidian/80"></div>
+      </div>
+
+      <div class="relative z-10 w-full max-w-md">
+
+        <!-- Brand Header -->
+        <div class="text-center mb-10 anim-fade-up">
+          <a href="index.html" class="inline-block">
+            <h1 class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight gold-shimmer">
+              Frostbite
+            </h1>
+          </a>
+          <p class="text-[11px] font-mono uppercase tracking-[0.2em] text-stone mt-2">
+            Research Desk Access Portal
+          </p>
+        </div>
+
+        <!-- Mode Toggle: Sign In / Register -->
+        <div class="flex items-center justify-center gap-1 mb-8 p-1 bg-surface-charcoal rounded-full border border-surface-subtle anim-fade-up anim-fade-up-delay-1">
+          <button id="tabSignIn" onclick="switchAuthMode('signin')" class="flex-1 py-2 px-4 rounded-full text-xs font-mono uppercase tracking-wider transition bg-champagne text-obsidian font-bold">
+            Sign In
+          </button>
+          <button id="tabRegister" onclick="switchAuthMode('register')" class="flex-1 py-2 px-4 rounded-full text-xs font-mono uppercase tracking-wider transition text-stone hover:text-ivory">
+            Request Access
+          </button>
+        </div>
+
+        <!-- Auth Form Card -->
+        <div class="bg-surface-charcoal/80 backdrop-blur-lg rounded-2xl border border-surface-subtle p-6 sm:p-8 anim-fade-up anim-fade-up-delay-2">
+          
+          <form id="authForm" onsubmit="handleAuth(event)">
+            
+            <!-- Name Field (Register Only) -->
+            <div id="nameField" class="hidden mb-4">
+              <label class="block text-[10px] font-mono uppercase tracking-wider text-stone mb-1.5">Full Name</label>
+              <input type="text" id="inputName" placeholder="Samuel Michael Alva" class="w-full bg-obsidian border border-surface-subtle rounded-lg px-4 py-3 text-sm text-ivory placeholder:text-stone-dark focus:outline-none transition" />
+            </div>
+
+            <!-- Email / Desk ID -->
+            <div class="mb-4">
+              <label class="block text-[10px] font-mono uppercase tracking-wider text-stone mb-1.5">Email or Desk ID</label>
+              <input type="email" id="inputEmail" placeholder="analyst@frostbite.bullion" required class="w-full bg-obsidian border border-surface-subtle rounded-lg px-4 py-3 text-sm text-ivory placeholder:text-stone-dark focus:outline-none transition" />
+            </div>
+
+            <!-- Password -->
+            <div class="mb-4">
+              <label class="block text-[10px] font-mono uppercase tracking-wider text-stone mb-1.5">Password</label>
+              <div class="relative">
+                <input type="password" id="inputPassword" placeholder="••••••••••" required minlength="6" class="w-full bg-obsidian border border-surface-subtle rounded-lg px-4 py-3 text-sm text-ivory placeholder:text-stone-dark focus:outline-none transition pr-12" />
+                <button type="button" onclick="togglePasswordVisibility()" class="absolute right-3 top-1/2 -translate-y-1/2 text-stone hover:text-champagne transition text-xs font-mono">
+                  <span id="togglePwdLabel">SHOW</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- API Key Field (Register Only) -->
+            <div id="apiKeyField" class="hidden mb-4">
+              <label class="block text-[10px] font-mono uppercase tracking-wider text-stone mb-1.5">
+                MCX API Key <span class="text-stone-dark">(Optional)</span>
+              </label>
+              <input type="text" id="inputApiKey" placeholder="mcx_live_xxxxxxxxxx" class="w-full bg-obsidian border border-surface-subtle rounded-lg px-4 py-3 text-sm text-ivory placeholder:text-stone-dark focus:outline-none transition font-mono text-xs" />
+            </div>
+
+            <!-- Remember + Forgot -->
+            <div class="flex items-center justify-between mb-6 text-xs font-mono text-stone" id="rememberRow">
+              <label class="flex items-center gap-2 cursor-pointer hover:text-ivory transition">
+                <input type="checkbox" class="rounded bg-obsidian border-surface-subtle text-champagne focus:ring-champagne focus:ring-offset-obsidian w-3.5 h-3.5" />
+                <span>Remember Desk</span>
+              </label>
+              <a href="#" class="text-champagne hover:text-champagne-light transition">Forgot Password?</a>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" id="submitBtn" class="pill-btn w-full py-3.5 bg-champagne text-obsidian font-bold hover:bg-champagne-light transition shadow-lg shadow-champagne/15 text-sm tracking-wider">
+              Access Research Desk ↗
+            </button>
+          </form>
+
+          <!-- Status Message -->
+          <div id="authMessage" class="hidden mt-4 p-3 rounded-lg border text-xs font-mono text-center"></div>
+
+          <!-- Divider -->
+          <div class="flex items-center gap-3 my-6">
+            <div class="flex-1 h-px bg-surface-subtle"></div>
+            <span class="text-[10px] font-mono text-stone uppercase tracking-wider">or continue with</span>
+            <div class="flex-1 h-px bg-surface-subtle"></div>
+          </div>
+
+          <!-- OAuth / Alt Access -->
+          <div class="grid grid-cols-2 gap-3">
+            <button class="pill-btn py-2.5 bg-surface-elevated border border-surface-subtle text-stone-light hover:text-ivory hover:border-champagne/50 transition text-[10.5px]">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" /><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" /><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" /><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" /></svg>
+              Google SSO
+            </button>
+            <button class="pill-btn py-2.5 bg-surface-elevated border border-surface-subtle text-stone-light hover:text-ivory hover:border-champagne/50 transition text-[10.5px]">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" /></svg>
+              GitHub
+            </button>
+          </div>
+        </div>
+
+        <!-- Bottom Legal / Navigation -->
+        <div class="mt-8 text-center text-[10px] font-mono text-stone anim-fade-up anim-fade-up-delay-4">
+          <p>HackInHills '26 Prototype · Illustrative Research Terminal</p>
+          <p class="mt-1">
+            <a href="index.html" class="text-champagne hover:text-champagne-light transition">← Return to Frostbite Terminal</a>
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    /* ======================================================== */
+    /* AUTH MODE SWITCHING: SIGN IN ↔ REGISTER                  */
+    /* ======================================================== */
+    let currentMode = 'signin';
+
+    function switchAuthMode(mode) {
+      currentMode = mode;
+      const tabSignIn = document.getElementById('tabSignIn');
+      const tabRegister = document.getElementById('tabRegister');
+      const nameField = document.getElementById('nameField');
+      const apiKeyField = document.getElementById('apiKeyField');
+      const rememberRow = document.getElementById('rememberRow');
+      const submitBtn = document.getElementById('submitBtn');
+      const authMessage = document.getElementById('authMessage');
+
+      authMessage.classList.add('hidden');
+
+      if (mode === 'signin') {
+        tabSignIn.className = 'flex-1 py-2 px-4 rounded-full text-xs font-mono uppercase tracking-wider transition bg-champagne text-obsidian font-bold';
+        tabRegister.className = 'flex-1 py-2 px-4 rounded-full text-xs font-mono uppercase tracking-wider transition text-stone hover:text-ivory';
+        nameField.classList.add('hidden');
+        apiKeyField.classList.add('hidden');
+        rememberRow.classList.remove('hidden');
+        submitBtn.textContent = 'Access Research Desk ↗';
+      } else {
+        tabRegister.className = 'flex-1 py-2 px-4 rounded-full text-xs font-mono uppercase tracking-wider transition bg-champagne text-obsidian font-bold';
+        tabSignIn.className = 'flex-1 py-2 px-4 rounded-full text-xs font-mono uppercase tracking-wider transition text-stone hover:text-ivory';
+        nameField.classList.remove('hidden');
+        apiKeyField.classList.remove('hidden');
+        rememberRow.classList.add('hidden');
+        submitBtn.textContent = 'Request Desk Access ↗';
+      }
+    }
+
+    /* ======================================================== */
+    /* FORM SUBMISSION HANDLER (Prototype — No Backend)         */
+    /* ======================================================== */
+    function handleAuth(e) {
+      e.preventDefault();
+      const email = document.getElementById('inputEmail').value;
+      const password = document.getElementById('inputPassword').value;
+      const msgBox = document.getElementById('authMessage');
+
+      if (!email || !password) {
+        showMessage('Please fill in all required fields.', 'error');
+        return;
+      }
+
+      if (currentMode === 'signin') {
+        showMessage('Desk session authenticated. Redirecting to terminal...', 'success');
+        setTimeout(() => { window.location.href = 'index.html'; }, 1500);
+      } else {
+        const name = document.getElementById('inputName').value;
+        if (!name) {
+          showMessage('Name is required for desk access registration.', 'error');
+          return;
+        }
+        showMessage('Access request submitted. Redirecting to terminal...', 'success');
+        setTimeout(() => { window.location.href = 'index.html'; }, 1500);
+      }
+    }
+
+    function showMessage(text, type) {
+      const msgBox = document.getElementById('authMessage');
+      msgBox.classList.remove('hidden');
+      if (type === 'success') {
+        msgBox.className = 'mt-4 p-3 rounded-lg border text-xs font-mono text-center bg-sage-faint text-sage border-sage/30';
+      } else {
+        msgBox.className = 'mt-4 p-3 rounded-lg border text-xs font-mono text-center bg-crimson-faint text-crimson border-crimson/30';
+      }
+      msgBox.textContent = text;
+    }
+
+    /* ======================================================== */
+    /* PASSWORD VISIBILITY TOGGLE                               */
+    /* ======================================================== */
+    function togglePasswordVisibility() {
+      const input = document.getElementById('inputPassword');
+      const label = document.getElementById('togglePwdLabel');
+      if (input.type === 'password') {
+        input.type = 'text';
+        label.textContent = 'HIDE';
+      } else {
+        input.type = 'password';
+        label.textContent = 'SHOW';
+      }
+    }
+  </script>
+</body>
+</html>
