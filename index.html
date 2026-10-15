@@ -96,6 +96,22 @@
     }
 
     /* ======================================================== */
+    /* MOBILE VIEWPORT LOCK: ELIMINATE SIDEWAYS SCROLL / GAPS   */
+    /* ======================================================== */
+    html, body {
+      overflow-x: hidden !important;
+      max-width: 100vw !important;
+      width: 100% !important;
+      position: relative;
+      margin: 0;
+      padding: 0;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    /* ======================================================== */
     /* BIDIRECTIONAL SCROLL-TRIGGERED REVEAL ANIMATIONS         */
     /* Smoothly appears on scroll-down; smoothly reverses on up */
     /* ======================================================== */
@@ -117,7 +133,7 @@
       transform: translateY(0);
     }
 
-    /* Slide Left */
+    /* Slide Left (Desktop) */
     .reveal-left {
       opacity: 0;
       transform: translateX(-50px);
@@ -129,7 +145,7 @@
       transform: translateX(0);
     }
 
-    /* Slide Right */
+    /* Slide Right (Desktop) */
     .reveal-right {
       opacity: 0;
       transform: translateX(50px);
@@ -139,6 +155,16 @@
     .reveal-right.is-revealed {
       opacity: 1;
       transform: translateX(0);
+    }
+
+    /* Mobile override: Replace horizontal translateX with translateY so elements never push outside viewport */
+    @media (max-width: 768px) {
+      .reveal-left, .reveal-right {
+        transform: translateY(35px) !important;
+      }
+      .reveal-left.is-revealed, .reveal-right.is-revealed {
+        transform: translateY(0) !important;
+      }
     }
 
     /* Scale In */
@@ -189,8 +215,8 @@
   <!-- ======================================================== -->
   <!-- TOP STICKY NAVIGATION BAR                                -->
   <!-- ======================================================== -->
-  <header class="sticky top-0 z-50 bg-obsidian/90 backdrop-blur-md border-b border-surface-subtle">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 sm:h-16 flex items-center justify-between">
+  <header class="sticky top-0 z-50 bg-obsidian/90 backdrop-blur-md border-b border-surface-subtle w-full max-w-full overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 sm:h-16 flex items-center justify-between w-full">
       
       <!-- Left: Home link -->
       <a href="#hero" class="text-sm font-display tracking-wider text-ivory hover:text-champagne transition flex items-center gap-2">
@@ -238,9 +264,9 @@
       </div>
     </div>
 
-    <!-- Live Benchmark Sub-Bar -->
-    <div class="bg-[#0f0e0c] border-t border-surface-subtle/50 px-4 py-1 text-[10px] sm:text-[11px] font-mono text-stone flex items-center justify-between overflow-x-auto whitespace-nowrap scrollbar-none">
-      <div class="flex items-center space-x-4 sm:space-x-6 max-w-7xl mx-auto w-full">
+    <!-- Live Benchmark Sub-Bar (Constrained with smooth internal scroll) -->
+    <div class="bg-[#0f0e0c] border-t border-surface-subtle/50 px-4 py-1 text-[10px] sm:text-[11px] font-mono text-stone flex items-center overflow-x-auto whitespace-nowrap scrollbar-none w-full max-w-full">
+      <div class="inline-flex items-center space-x-4 sm:space-x-6 py-0.5">
         <div class="flex items-center gap-1.5">
           <span class="w-1.5 h-1.5 rounded-full bg-sage-bright animate-pulse"></span>
           <span class="text-stone-light">MCX FEED:</span>

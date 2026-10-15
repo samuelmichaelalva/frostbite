@@ -60,6 +60,19 @@
   </script>
 
   <style>
+    /* Mobile Viewport Lock: Prevent horizontal shift */
+    html, body {
+      overflow-x: hidden !important;
+      max-width: 100vw !important;
+      width: 100% !important;
+      position: relative;
+      margin: 0;
+      padding: 0;
+    }
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: #0B0B0B; }
     ::-webkit-scrollbar-thumb { background: #2A2825; border-radius: 9999px; }
