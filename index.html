@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frostbite | Real-World Physical & Digital Gold</title>
+  <meta name="description" content="Frostbite — Sovereign institutional gold reserve, live spot commodities data, and certified physical bullion custody.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="ambient-glow"></div>
+
+  <!-- Header & Live Gold Ticker -->
+  <header>
+    <a href="#" class="brand" data-target="home"><span class="brand-mark">✦</span>Frostbite</a>
+    <nav>
+      <button class="nav-btn active" data-target="home">Home</button>
+      <button class="nav-btn" data-target="about">Reserves</button>
+      <button class="nav-btn" data-target="market">Market Live</button>
+    </nav>
+    <div class="gold-ticker" id="gold-ticker" title="Live Commodities Spot Price">
+      <span class="live-dot"></span>
+      <span>GOLD: <strong id="gold-price-val">$2,748.60/oz</strong></span>
+      <span id="gold-change" style="color: #4ade80;">+0.62%</span>
+    </div>
+  </header>
+
+  <main>
+    <!-- 1. HOME VIEW (GOLD ECOSYSTEM) -->
+    <div id="view-home" class="view-panel active">
+      <section class="hero hero-art">
+        <img src="assets/home_hero_iceberg.webp" alt="Frostbite Gold Iceberg Summit" class="hero-img">
+        <div class="hero-overlay">
+          <h1 class="hero-title">Frostbite</h1>
+          <p class="hero-tag">Sovereign Physical & Digital Gold · Live Spot Settlement</p>
+        </div>
+      </section>
+
+      <section class="section text-center">
+        <h2 class="heading-xl">True Wealth. Solidified in Pure Gold.</h2>
+        <p class="subtext centered">Hedge volatility with LBMA-certified physical gold bullion. Real-world allocated reserves, 100% verified on-chain and in secure institutional vaults.</p>
+        <button class="btn btn-gold open-allocate-btn">Allocate Gold Now ↗</button>
+      </section>
+
+      <section class="section">
+        <div class="grid-2">
+          <!-- 30K Ingot Reserve Card -->
+          <div class="card-3d card-hero-visual">
+            <img src="assets/gold_bars_sand.webp" alt="Physical Gold Bullion Ingot" class="card-bg-img">
+            <div class="card-overlay-content">
+              <div class="stat-val">$30K Allocated</div>
+              <div class="gold-calc-badge" id="home-gold-math">⚡ LIVE: 10.91 Troy Oz Physical Gold</div>
+              <p class="subtext" style="font-size: .95rem; color: #d1d5db;">Audited fine bullion backed 1:1 by physical depository bars.</p>
+              <button class="btn btn-ghost" data-target="about" style="align-self: flex-start;">Inspect Vault ↗</button>
+            </div>
+          </div>
+
+          <!-- Market Intelligence Card -->
+          <div class="card-3d newsletter-card">
+            <h3 class="heading-xl" style="font-size: clamp(2.2rem, 4.5vw, 3.4rem); margin-bottom: 1rem;">Don't Miss<br>a Shift</h3>
+            <p class="subtext" style="margin-bottom: 2rem;">Real-time bullion price alerts, macro commodities data, and vault audit reports delivered straight to you.</p>
+            <form id="newsletter-form">
+              <input type="email" placeholder="Enter your email address" required class="form-input">
+              <button type="submit" class="btn btn-gold" style="width: 100%; justify-content: center;">Get Price Alerts ↗</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Gold Mandate Banner -->
+        <div class="mission-banner">
+          <h2>Our mission is to democratize institutional-grade physical gold custody with zero counterparty risk.</h2>
+          <div style="margin-top: 2rem;">
+            <button class="btn btn-gold open-allocate-btn">Open Gold Account ↗</button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- 2. RESERVES VIEW (PHYSICAL CUSTODY) -->
+    <div id="view-about" class="view-panel">
+      <section class="hero hero-art">
+        <img src="assets/about_gold_bar.webp" alt="Greed Gold Ingot Bar" class="hero-img">
+        <div class="hero-overlay">
+          <h1 class="hero-title" style="font-size: clamp(2.2rem, 5.5vw, 4.5rem);">Bullion Reserves</h1>
+          <p class="hero-tag">Certified 999.9 Swiss Bullion · Zurich & Singapore Vaults</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="heading-xl">Institutional Gold Security & Provenance</h2>
+        <p class="subtext" style="font-size: 1.25rem; margin-bottom: 3.5rem;">
+          Every gram of Frostbite gold is fully segregated, individually serialized, and stored in high-security non-bank depository vaults with 100% comprehensive insurance.
+        </p>
+
+        <div class="grid-3">
+          <div class="card-3d pillar-card">
+            <div class="pillar-num">01</div>
+            <h3>999.9 Purity</h3>
+            <p class="subtext">LBMA Good Delivery standard bullion cast by world-renowned Swiss and international refineries.</p>
+          </div>
+          <div class="card-3d pillar-card">
+            <div class="pillar-num">02</div>
+            <h3>Direct Ownership</h3>
+            <p class="subtext">Legal title and ownership belong directly to you. No fractional lending, no paper gold derivatives.</p>
+          </div>
+          <div class="card-3d pillar-card">
+            <div class="pillar-num">03</div>
+            <h3>Instant Liquidity</h3>
+            <p class="subtext">Redeem for physical delivery or liquidate into USD/EUR at live real-time market spot rates 24/7.</p>
+          </div>
+        </div>
+
+        <div class="mission-banner text-center" style="margin-top: 4rem;">
+          <h2 style="font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem;">Audit & Verification</h2>
+          <p class="subtext centered" style="color: #ecdcc9; margin-bottom: 2rem;">Quarterly physical vault inspections verified by independent Big-Four auditing firms.</p>
+          <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+            <button class="btn btn-gold open-allocate-btn">Acquire Bullion ↗</button>
+            <button class="btn btn-ghost" data-target="market">Live Spot Rates ↗</button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- 3. LIVE MARKET VIEW (SPOT COMMODITIES) -->
+    <div id="view-market" class="view-panel">
+      <section class="hero hero-art">
+        <img src="assets/event_mountain.webp" alt="Golden Mountain Summit" class="hero-img">
+        <div class="hero-overlay">
+          <h1 class="hero-title" style="font-size: clamp(2.2rem, 5.5vw, 4.5rem);">Live Commodities</h1>
+          <p class="hero-tag">Global Commodities Feed · 24/7 Spot Settlement</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="event-meta-bar">
+          <div>
+            <div class="meta-label">Spot Asset</div>
+            <p class="meta-val">XAU / USD (Fine Gold)</p>
+          </div>
+          <div>
+            <div class="meta-label">Live Price</div>
+            <p class="meta-val" id="market-page-price">$2,748.60 / oz</p>
+          </div>
+          <div>
+            <div class="meta-label">Market Status</div>
+            <p class="meta-val" style="color: #4ade80;">● TRADING OPEN</p>
+          </div>
+        </div>
+
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-title">Spot Pricing Feed</div>
+            <p class="subtext">Direct integration with institutional LBMA and physical commodity spot feeds updated every 45 seconds.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-title">Zero Custody Spread</div>
+            <p class="subtext">Transparent spot settlement with minimal transaction friction for individual and institutional buyers.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-title">Physical Bar Redemption</div>
+            <p class="subtext">Door-to-door armored courier delivery or direct collection at insured depository facilities.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-title">Proof of Reserve (PoR)</div>
+            <p class="subtext">Real-time cryptographic and bar-list attestation matching 100% of physical vaults to ledger balances.</p>
+          </div>
+        </div>
+
+        <div style="margin-top: 3.5rem;">
+          <button class="btn btn-gold open-allocate-btn" style="font-size: 1.1rem; padding: 1rem 2.5rem;">Purchase Gold Allocation ↗</button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Global Golden Footer -->
+  <footer>
+    <div class="footer-hero">GOLD</div>
+    <div class="footer-meta">
+      <div>
+        <p style="font-weight: 700; margin-bottom: .3rem;">Institutional Desk</p>
+        <p><a href="mailto:gold@frostbite.com" class="footer-link">gold@frostbite.com</a></p>
+        <p style="font-weight: 700; margin-top: .8rem; margin-bottom: .3rem;">Depository & Vaults</p>
+        <p><a href="mailto:vaults@frostbite.com" class="footer-link">vaults@frostbite.com</a></p>
+      </div>
+      <div>
+        <p style="font-weight: 700; margin-bottom: .3rem;">Channels</p>
+        <div style="display: flex; gap: .8rem; margin-top: .3rem;">
+          <a href="https://bloomberg.com" target="_blank" rel="noopener" class="footer-link">Bloomberg ↗</a>
+          <a href="https://reuters.com" target="_blank" rel="noopener" class="footer-link">Reuters ↗</a>
+          <a href="https://x.com" target="_blank" rel="noopener" class="footer-link">X ↗</a>
+        </div>
+      </div>
+      <div style="max-width: 380px;">
+        <p style="font-weight: 700; margin-bottom: .3rem;">Frostbite Bullion Custody</p>
+        <p style="color: var(--text-dim); font-size: .85rem; font-family: 'Space Mono', monospace;">Physical gold holdings held in segregated, audited vaults with all-risk Lloyd's of London syndicates insurance.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast"></div>
+
+  <!-- Gold Allocation Modal -->
+  <div class="modal-overlay" id="allocate-modal">
+    <div class="modal-card">
+      <button class="modal-close" id="close-modal">&times;</button>
+      <h3 style="font-family: 'Syne'; font-size: 1.8rem; margin-bottom: .5rem;">Allocate Gold Bullion</h3>
+      <p class="subtext" style="font-size: .9rem; margin-bottom: 1.5rem;">Live Spot Settlement · Insured Vault Custody</p>
+      <form id="allocate-form">
+        <label style="font-size: .85rem; font-weight: 600;">Investor / Entity Name</label>
+        <input type="text" class="form-input" required placeholder="Alexander Vance">
+        <label style="font-size: .85rem; font-weight: 600;">Contact Email</label>
+        <input type="email" class="form-input" required placeholder="vance@capital.com">
+        <label style="font-size: .85rem; font-weight: 600;">Target Allocation Amount</label>
+        <select class="form-input" style="background: #1c1d22;">
+          <option>10 Troy Ounces (~$27,500)</option>
+          <option>1 Kilogram Bar (~$88,000)</option>
+          <option>Institutional Ingot Allocation ($100K+)</option>
+        </select>
+        <button type="submit" class="btn btn-gold" style="width: 100%; justify-content: center; margin-top: 1rem;">Confirm Allocation Order ↗</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
