@@ -1,351 +1,530 @@
 # Frostbite
+### *Sovereign Physical & Digital Gold Intelligence Platform*
 
-Frostbite is a single-page web application developed as a hackathon prototype for HackInHills 2026. The platform integrates real-time commodity pricing intelligence with physical bullion custody education and a community event management interface.
-
----
-
-## 1. Overview
-
-Frostbite explores the intersection of commodity asset intelligence and public fundraising. The application operates as a lightweight, zero-framework Single Page Application (SPA) designed to solve two core challenges:
-
-1. **Commodity Intelligence**: Providing real-time precious metals valuation without requiring paid API gateway subscriptions by leveraging open public market feeds.
-2. **Community Engagement**: Offering an integrated registration and allocation portal that shifts context dynamically between bullion acquisition inquiries and community charity run participation.
-
-The project demonstrates a production-grade frontend architecture running on static hosting with optional serverless backend integrations for cloud data persistence and automated email dispatch.
+[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://frostbite-taupe.vercel.app)
+[![HackInHills 2026](https://img.shields.io/badge/HackInHills-2026%20Prototype-dfb260?style=for-the-badge)](https://frostbite-taupe.vercel.app)
+[![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](#06-technology-stack)
+[![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](#06-technology-stack)
+[![Vercel Serverless](https://img.shields.io/badge/Vercel-Serverless%20Functions-black?style=for-the-badge&logo=vercel)](#06-technology-stack)
 
 ---
 
-## 2. Problem & Solution
-
-### Problem
-- **Access Barriers in Commodity Data**: Real-time precious metals feeds (Gold, Silver, Platinum, Palladium) typically require paid API keys, imposing high cost and configuration barriers for early prototypes and academic research interfaces.
-- **Pricing and Fineness Confusion**: Retail buyers and researchers face opacity across varying asset fineness standards (such as 995.0 vs 999.0 purity), differing quotation units (troy ounces vs grams), and dynamic conversion ratios.
-- **Fragmented User Experiences**: Fundraisers and asset stewardship initiatives frequently operate on disparate platforms, separating asset tracking from community registration workflows.
-
-### Solution
-- **Keyless Public Feeds**: Frostbite queries the public Binance REST API for `PAXGUSDT` (PAX Gold, a token backed 1:1 by fine physical troy ounces of LBMA-certified gold), obtaining real-time spot quotes without requiring authentication or API keys.
-- **Derived Precious Metals Tracking**: Derives estimates for Silver, Platinum, and Palladium in real time using established mathematical market ratios relative to live gold spot prices.
-- **Unified Responsive SPA**: Delivers a zero-framework interface with dual-context modals, instant metric recalculations, local-first offline fallback storage, and optional cloud serverless synchronization.
+## ⚡ 60-Second Summary
+> **Frostbite** is a zero-framework, single-page web application built for **HackInHills 2026** that unifies **real-time precious metals intelligence** with a **community fundraiser event hub**.
+> It queries the Binance public REST API for live gold spot pricing (via PAXG/USDT) — no paid API key required — and derives Silver, Platinum, and Palladium estimates in real-time using established market ratios.
+> The platform features institutional-grade UI interactions, a dual-context registration modal, three Vercel serverless backend functions, and optional cloud persistence via Supabase and email dispatch via Resend.
 
 ---
 
-## 3. Key Features
+## 📑 Project Details
 
-- **Live Commodity Spot Pricing**:
-  - Direct client-side polling of the Binance `PAXGUSDT` 24-hour ticker feed.
-  - Automatic fallback to an internal serverless endpoint (`/api/gold`) if browser-level external requests are restricted.
-  - Periodic auto-refresh every 45 seconds via `setInterval`.
-  - Client-side timestamp indicator reporting exact fetch time and live connectivity status (`LIVE` vs `Estimate`).
-- **Derived Multi-Commodity Suite**:
-  - Live calculation of Silver (XAG), Platinum (XPT), and Palladium (XPD) via baseline ratio multipliers relative to active spot gold.
-- **Interactive Gold Value Converter**:
-  - Real-time unit conversion: Converts user-entered USD values directly to equivalent troy ounces (`USD ÷ spot_price`) and metric grams (`troy oz × 31.1035`).
-- **Zero-Framework Single-Page Navigation**:
-  - DOM-based view swapping using `data-target` attributes, eliminating page reloads and heavy external client-side routing libraries.
-  - Four distinct views:
-    - **Home**: Platform overview, live spot ticker badge, luxury interaction physics, and newsletter subscription.
-    - **Reserves**: Institutional bullion custody framework (LBMA 999.9 standards, Zurich & Singapore vaulting).
-    - **Market Live**: Real-time commodity board, derived asset price cards, conversion calculator, and feed status indicators.
-    - **Event**: Race hub for "Frostbite: Running For Change" (schedule, course milestones, and participant categories).
-- **Dynamic Context-Aware Modal**:
-  - Reusable modal dialog (`#allocate-modal`) that adapts its form fields, headings, and select options depending on the active view:
-    - *Event view*: Displays race categories (5K Community Run, 10K Trail Run, Partner Booth).
-    - *Other views*: Displays bullion custody allocation options (10 Troy Ounces, 1 Kilogram Bar, Institutional Ingot).
-- **Offline-First Dual-Tier Persistence**:
-  - Submissions immediately persist to browser `localStorage` (`frostbite_orders` and `frostbite_subscribers`).
-  - Asynchronously dispatches data to serverless API routes (`/api/register`, `/api/subscribe`). If remote backends are unconfigured, user actions remain saved locally with non-blocking UI feedback.
-- **Interaction Physics**:
-  - Custom pointer-follow ambient radial glow.
-  - 3D card tilt transformations driven by normalized mouse coordinates (`perspective(800px) rotateX(...) rotateY(...)`).
-  - Spring-physics motion curves using CSS `cubic-bezier(0.16, 1, 0.3, 1)`.
-- **Research Desk Portal (`login.html`)**:
-  - Dedicated authentication and desk access request interface with custom input controls and view-state toggles.
+| Parameter | Specification |
+| :--- | :--- |
+| **Hackathon** | HackInHills 2026 |
+| **Category** | FinTech / Commodity Intelligence |
+| **Live Deployment** | [frostbite-taupe.vercel.app](https://frostbite-taupe.vercel.app) |
+| **Repository** | [github.com/samuelmichaelalva/frostbite](https://github.com/samuelmichaelalva/frostbite) |
+| **Architecture** | Zero-Framework SPA · Vercel Serverless · Binance Public API |
+| **Status** | Hackathon Prototype |
 
 ---
 
-## 4. Live Demo & Screenshots
+## Table of Contents
 
-### Deployments & Links
-- **Production URL**: [https://frostbite-taupe.vercel.app](https://frostbite-taupe.vercel.app)
-- **Source Code Repository**: [https://github.com/samuelmichaelalva/frostbite](https://github.com/samuelmichaelalva/frostbite)
-
-### Project Resources
-- [LinkedIn Pitch Video](https://lnkd.in/p/djbNYUpr)
-- [Prototype Demonstration](https://drive.google.com/file/d/1OSgYeKWHo8GKuMF1qOdHjajBJ38n4lEd/view?usp=drivesdk)
-- [Project Presentation (PPT)](https://drive.google.com/file/d/1ea4lmIMMOzRFWw52CDiPqJ2Ktl1lycLx/view?usp=drivesdk)
-
-### Application Screenshots
-
-| View | Desktop | Mobile |
-| :--- | :---: | :---: |
-| **Home View** | ![Home Desktop](./Home_Desktop.png) | ![Home Mobile](./Home_Mobile.png) |
-| **Bullion Reserves View** | ![Reserves Desktop](./About_Desktop.png) | ![About Mobile](./About_Mobile.png) |
-| **Event Registration View** | ![Event Desktop](./Event_Desktop.png) | ![Event Mobile](./Event_Mobile.png) |
+* [01. Project Overview](#01-project-overview)
+* [02. Problem Statement & Solution](#02-problem-statement--solution)
+* [03. Key Features](#03-key-features)
+* [04. Screenshots & Live Demo](#04-screenshots--live-demo)
+* [05. System Architecture](#05-system-architecture)
+* [06. Technology Stack](#06-technology-stack)
+* [07. Project Structure](#07-project-structure)
+* [08. Installation & Setup](#08-installation--setup)
+* [09. API Reference](#09-api-reference)
+* [10. Environment Variables](#10-environment-variables)
+* [11. Team & Contributions](#11-team--contributions)
+* [12. Project Resources](#12-project-resources)
+* [13. Prototype Limitations](#13-prototype-limitations)
 
 ---
 
-## 5. Architecture
+## 01. Project Overview
 
-Frostbite uses a decoupled architecture where the client layer handles rendering, animation, and live market data acquisition directly from public endpoints. When deployed to Vercel, serverless functions provide optional server-side fallback feeds, database synchronization, and transactional email distribution.
+Frostbite demonstrates a production-grade web application architecture for a sovereign physical and digital gold custody platform, combined with an integrated community fundraiser event system.
+
+The application is a **zero-framework Single-Page Application (SPA)**: all four views (Home, Bullion Reserves, Market Live, and Event) exist within a single `index.html`, with DOM-based view switching handled entirely by vanilla JavaScript — no React, Vue, Angular, or router library required.
+
+At its core, Frostbite addresses a gap in accessible commodity intelligence: obtaining real-time, authoritative gold spot pricing without a paid API subscription. It achieves this by integrating directly with the Binance public REST API, using `PAXGUSDT` — the ticker for PAX Gold, a token backed 1:1 by one fine troy ounce of physical gold held in LBMA-certified custody.
+
+The platform additionally includes a community fundraiser hub for **Frostbite: Running For Change**, a charity run event (May 12, 2025 · Green Bay Trail, Glencoe, IL), complete with race registration, event schedule, and participant categories — served through the same unified modal dialog system that handles bullion allocation inquiries.
+
+---
+
+## 02. Problem Statement & Solution
+
+### The Problem
+
+Three distinct friction points motivated Frostbite's design:
+
+1. **Commodity Data Access Barriers**: Real-time precious metals feeds for Gold, Silver, Platinum, and Palladium typically require paid subscriptions (e.g., GoldAPI.io, Metals API, Bloomberg Terminal). This creates a significant barrier for academic prototypes, indie developers, and small-scale fintech demonstrations.
+
+2. **Pricing Opacity and Unit Confusion**: End-users face genuine opacity when evaluating gold investments: troy ounce vs gram conversions, fineness standards (995.0 vs 999.9), and percentage-based price changes are rarely surfaced together in an accessible, real-time interface.
+
+3. **Platform Fragmentation**: Community fundraising and asset-stewardship typically operate on entirely separate platforms, requiring users to context-switch between multiple dashboards and registration systems.
+
+### The Solution
+
+| Problem | Frostbite's Approach |
+| :--- | :--- |
+| Paid API barrier | Queries Binance `PAXGUSDT` public ticker — no authentication required |
+| Silver/Platinum/Palladium data cost | Derives estimates mathematically from live gold using proven market ratios |
+| Unit conversion friction | Built-in Gold Value Calculator: live USD → troy oz → gram conversion |
+| Platform fragmentation | Single unified modal handles both bullion allocation and event registration |
+| Backend dependency | Local-first persistence to `localStorage`; serverless backend is optional |
+
+---
+
+## 03. Key Features
+
+### Live Commodity Intelligence
+* **Real-time Gold Spot Price** fetched from the Binance public REST API (`PAXGUSDT`, 24-hour ticker). PAXG is backed 1:1 by physical gold held in LBMA-certified vaults, making its exchange price a reliable proxy for XAU/USD.
+* **Four-Metal Dashboard**: Gold (XAU), Silver (XAG), Platinum (XPT), and Palladium (XPD) displayed simultaneously. Silver, Platinum, and Palladium are derived from the live gold price using historical baseline ratios (see Architecture).
+* **Auto-refresh** via `setInterval` every 45 seconds; timestamp indicator shows the exact fetch time and live/estimate status.
+* **Feed source label** updates dynamically in the UI to indicate whether data is `✦ PAXG/USDT · Binance · LIVE` or falling back to a baseline estimate.
+
+### Gold Value Calculator
+* Interactive input accepting any USD amount; computes equivalent troy ounces (`USD ÷ spot`) and fine grams (`oz × 31.1035`) in real-time against the live spot price.
+* The same calculation drives the live badge on the Home view: `$30,000 ÷ spot = N troy oz`.
+
+### Zero-Framework SPA Navigation
+* All four views (`Home`, `Reserves`, `Market Live`, `Event`) are `<div class="view-panel">` sections inside a single `index.html`.
+* Navigation uses `data-target` attributes on `<button>` elements; the `switchView()` function in `app.js` toggles the CSS `.active` class with `opacity + translateY` transitions animated via `cubic-bezier(0.16, 1, 0.3, 1)`.
+
+### Context-Aware Modal Dialog
+* A single `#allocate-modal` dialog is reused across all pages.
+* When the active view is `event`, the modal dynamically reconfigures its title, subtitle, and `<select>` options to show race participation categories (5K Community Run, 10K Trail Run, Partner Booth).
+* On all other views, the modal presents gold bullion allocation tiers (10 Troy Ounces, 1 Kilogram Bar, Institutional Ingot).
+
+### Local-First Offline Persistence
+* Form submissions (allocation orders and newsletter subscriptions) are written to `localStorage` (`frostbite_orders`, `frostbite_subscribers`) immediately, before any network call.
+* Asynchronous POSTs to `/api/register` and `/api/subscribe` are attempted silently; the UI gives accurate feedback regardless of whether the serverless backend is reachable.
+
+### Interaction Physics
+* **Pointer-follow ambient glow**: A `radial-gradient` overlay tracks cursor position via the `pointermove` event, creating a subtle atmospheric lighting effect.
+* **3D card tilt**: `.card-3d` elements apply `perspective(800px) rotateX rotateY` transforms based on normalized pointer coordinates within each card's bounding box.
+* **Spring-physics easing**: All transitions use `cubic-bezier(0.16, 1, 0.3, 1)` throughout CSS — a spring-like easing curve.
+
+### Research Desk Portal (`login.html`)
+* A standalone authentication page with Tailwind CSS (CDN), JetBrains Mono typography, and a molten gold backdrop.
+* Features a mode-toggle between "Login" and "Request Access" states, dynamically showing/hiding name, API key, and "Remember Desk" fields.
+
+---
+
+## 04. Screenshots & Live Demo
+
+**Live Application:** [frostbite-taupe.vercel.app](https://frostbite-taupe.vercel.app)
+
+### Application Views
+
+| Home View | Bullion Reserves View |
+| :---: | :---: |
+| <img src="./Home_Desktop.png" alt="Frostbite Home — Desktop" width="480" /> | <img src="./About_Desktop.png" alt="Frostbite Reserves — Desktop" width="480" /> |
+| *Live spot badge, 3D card physics, newsletter form* | *Three-pillar custody framework, mission banner* |
+
+| Market Live View | Event Registration View |
+| :---: | :---: |
+| <img src="./Home_Tablet.png" alt="Frostbite Market — Tablet" width="480" /> | <img src="./Event_Desktop.png" alt="Frostbite Event — Desktop" width="480" /> |
+| *Four-metal commodity grid, gold value calculator* | *Race schedule timeline, context-aware modal* |
+
+### Mobile Responsiveness
+
+| Home | Reserves | Event |
+| :---: | :---: | :---: |
+| <img src="./Home_Mobile.png" alt="Home Mobile" width="220" /> | <img src="./About_Mobile.png" alt="Reserves Mobile" width="220" /> | <img src="./Event_Mobile.png" alt="Event Mobile" width="220" /> |
+
+---
+
+## 05. System Architecture
+
+Frostbite uses a decoupled architecture where the client layer handles all rendering and market data acquisition directly from public endpoints. Vercel serverless functions provide an optional fallback layer for data, plus cloud persistence and email when configured.
 
 ```mermaid
 flowchart TD
-    subgraph Client ["Client Layer (Browser Runtime)"]
-        SPA["Single-Page Application (index.html / app.js)"]
-        Views["View Panels (Home | Reserves | Market | Event)"]
-        Converter["Gold Converter & Multi-Commodity Logic"]
-        LocalStorage[("Browser LocalStorage\n(Orders & Subscribers)")]
+    subgraph Client["Client Layer · Browser Runtime"]
+        SPA["SPA — index.html + app.js\n(4 View Panels · DOM Routing)"]
+        Ticker["Live Gold Ticker\n(header, persistent across views)"]
+        Market["Market Live View\n(4-Metal Grid + Calculator)"]
+        Modal["Context-Aware Modal\n(Bullion Allocation / Race Registration)"]
+        LS[("localStorage\nfrostbite_orders\nfrostbite_subscribers")]
     end
 
-    subgraph Feeds ["Public Market Feeds"]
-        Binance["Binance Public REST API\n(PAXGUSDT Ticker)"]
+    subgraph PublicFeed["Public Market Feed"]
+        Binance["Binance REST API\nGET /api/v3/ticker/24hr\nsymbol=PAXGUSDT"]
     end
 
-    subgraph Serverless ["Backend Serverless Layer (Vercel)"]
-        APIGold["GET /api/gold\n(Spot Fallback)"]
-        APIRegister["POST /api/register\n(Allocation / Race)"]
-        APISubscribe["POST /api/subscribe\n(Newsletter)"]
+    subgraph Serverless["Vercel Serverless Layer"]
+        APIGold["GET /api/gold\nSpot price fallback proxy"]
+        APIReg["POST /api/register\nAllocation & race handler"]
+        APISub["POST /api/subscribe\nNewsletter subscription"]
     end
 
-    subgraph ExternalServices ["External Cloud Services (Optional)"]
-        GoldAPI["GoldAPI.io\n(Premium Spot Feed)"]
-        Supabase[("Supabase\n(PostgreSQL Cloud DB)")]
-        Resend["Resend API\n(Transactional Email)"]
+    subgraph External["External Services · Optional"]
+        GoldAPI["GoldAPI.io\n(requires GOLD_API_KEY)"]
+        Supabase[("Supabase PostgreSQL\n/rest/v1/registrations\n/rest/v1/subscribers")]
+        Resend["Resend API\nTransactional Email"]
     end
 
-    SPA -->|1. Polling every 45s (CORS-friendly)| Binance
-    SPA -.->|2. Fallback if client fetch fails| APIGold
-    SPA -->|3. Local-first persistence| LocalStorage
-    SPA -->|4. Async Form Submission| APIRegister
-    SPA -->|5. Async Subscription| APISubscribe
+    SPA -->|"① Poll every 45s\n(no auth required)"| Binance
+    SPA -.->|"② Fallback if Binance\nbrowser-blocked"| APIGold
+    SPA -->|"③ Persist immediately"| LS
+    SPA -->|"④ Async POST"| APIReg
+    SPA -->|"⑤ Async POST"| APISub
 
-    APIGold -.->|If GOLD_API_KEY present| GoldAPI
-    APIGold -.->|Default public fallback| Binance
-    APIRegister -.->|If SUPABASE_URL configured| Supabase
-    APIRegister -.->|If RESEND_API_KEY configured| Resend
-    APISubscribe -.->|If SUPABASE_URL configured| Supabase
-    APISubscribe -.->|If RESEND_API_KEY configured| Resend
+    APIGold -.->|"If GOLD_API_KEY set"| GoldAPI
+    APIGold -.->|"Default fallback"| Binance
+    APIReg -.->|"If SUPABASE_URL set"| Supabase
+    APIReg -.->|"If RESEND_API_KEY set"| Resend
+    APISub -.->|"If SUPABASE_URL set"| Supabase
+    APISub -.->|"If RESEND_API_KEY set"| Resend
 ```
 
-### Market Data Flow & Derived Pricing Logic
-1. **Primary Gold Feed**: Client executes an asynchronous `fetch` request to `https://api.binance.com/api/v3/ticker/24hr?symbol=PAXGUSDT`. Because Paxos Gold (PAXG) is backed 1:1 by one fine troy ounce of physical gold under LBMA custody, its market price closely tracks spot gold (XAU/USD).
-2. **Server-Side Fallback**: If browser client fetches are blocked (e.g., corporate firewalls or strict ad-blockers), the client routes the request to `/api/gold`, which queries GoldAPI.io (if configured) or proxies the Binance ticker via the Node.js runtime.
-3. **Derived Commodities Formula**:
-   $$\text{Silver Price (XAG)} = \frac{\text{Gold Spot Price}}{85}$$
-   $$\text{Platinum Price (XPT)} = \frac{\text{Gold Spot Price}}{2.8}$$
-   $$\text{Palladium Price (XPD)} = \frac{\text{Gold Spot Price}}{2.6}$$
-4. **Calculations**:
-   $$\text{Troy Ounces} = \frac{\text{USD Amount}}{\text{Gold Spot Price}}$$
-   $$\text{Fine Grams} = \text{Troy Ounces} \times 31.1035$$
+### Derived Commodity Pricing
+
+Only Gold (XAU) is sourced from a live market feed. The other three metals are computed client-side using baseline ratios applied to the live gold price:
+
+| Metal | Symbol | Derivation Formula | Baseline Ratio |
+| :--- | :---: | :--- | :--- |
+| Gold | XAU | Direct — Binance PAXGUSDT | — |
+| Silver | XAG | `gold_price ÷ 85` | 85 : 1 |
+| Platinum | XPT | `gold_price ÷ 2.8` | 2.8 : 1 |
+| Palladium | XPD | `gold_price ÷ 2.6` | 2.6 : 1 |
+
+> **Note:** Silver, Platinum, and Palladium prices are reference estimates, not independently sourced live feeds. They are clearly labelled as "Reference Estimate" in the UI.
+
+### Gold Value Conversion
+
+$$\text{Troy Ounces} = \frac{\text{USD Amount}}{\text{Gold Spot Price (PAXGUSDT)}}$$
+
+$$\text{Fine Grams} = \text{Troy Ounces} \times 31.1035$$
 
 ---
 
-## 6. Tech Stack
+## 06. Technology Stack
 
-| Component | Technology | Description |
+### Frontend
+| Component | Technology | Detail |
 | :--- | :--- | :--- |
-| **Frontend Core** | HTML5, Vanilla JavaScript (ES6+) | Native DOM manipulation, async fetch API, zero external framework dependencies |
-| **Styling & Design** | Modern CSS3 | Custom CSS variables, responsive grid/flexbox, hardware-accelerated transforms |
-| **Typography** | Google Fonts | `Syne` (display headers), `Plus Jakarta Sans` (body), `Space Mono` (market data) |
-| **Asset Pipeline** | WebP & JPEG | Sliced visual compositions optimized for high-density displays |
-| **Public Market Feed** | Binance Public REST API | Free keyless ticker for `PAXGUSDT` spot price |
-| **Serverless Backend** | Node.js (Vercel Serverless) | Serverless functions for proxy quotes, database insertion, and email dispatch |
-| **Database (Optional)** | Supabase | PostgreSQL REST API endpoint integration (`/rest/v1/registrations`, `/rest/v1/subscribers`) |
-| **Email (Optional)** | Resend API | Transactional confirmation email dispatch |
-| **Deployment** | Vercel | Static CDN distribution with serverless routing rules |
+| **Markup** | HTML5 | Semantic, single-file SPA structure |
+| **Logic** | Vanilla JavaScript (ES6+) | Zero external framework; `async/await`, `fetch`, DOM API |
+| **Styling** | Custom CSS3 | CSS custom properties, flexbox, grid, hardware-accelerated transforms |
+| **Typography** | Google Fonts | `Syne` (display) · `Plus Jakarta Sans` (body) · `Space Mono` (data) |
+| **Login Portal** | Tailwind CSS (CDN) + `JetBrains Mono` | Used exclusively in `login.html` |
+
+### Backend (Vercel Serverless)
+| Component | Technology | Detail |
+| :--- | :--- | :--- |
+| **Runtime** | Node.js (Vercel Functions) | ES Module serverless handlers |
+| **Market Data** | Binance Public REST API | `PAXGUSDT` 24hr ticker — no authentication |
+| **Premium Data** | GoldAPI.io | Optional; activated by `GOLD_API_KEY` env var |
+| **Database** | Supabase (PostgreSQL) | Optional; REST API for `registrations` and `subscribers` tables |
+| **Email** | Resend API | Optional; transactional confirmations via `onboarding@resend.dev` |
+
+### Infrastructure
+| Component | Technology |
+| :--- | :--- |
+| **Hosting** | Vercel (static CDN + serverless) |
+| **Routing** | `vercel.json` rewrite rules for `/api/*` |
+| **Assets** | WebP (production), JPEG (source originals) |
 
 ---
 
-## 7. Project Structure
+## 07. Project Structure
 
 ```
 frostbite/
-├── .gitignore                    # Git file exclusion rules
-├── README.md                     # Technical documentation and project overview
-├── index.html                    # Main Single-Page Application (Home, Reserves, Market, Event)
-├── login.html                    # Research Desk access portal and authentication interface
-├── app.js                        # Client-side logic: SPA navigation, live feeds, converter, forms
-├── style.css                     # Global design system, typography tokens, component layouts
-├── vercel.json                   # Vercel deployment rewrite configuration for API routes
-├── Home_Desktop.png              # Screenshot: Home view on desktop viewport
-├── Home_Mobile.png               # Screenshot: Home view on mobile viewport
-├── Home_Tablet.png               # Screenshot: Home view on tablet viewport
-├── About_Desktop.png             # Screenshot: Reserves view on desktop viewport
-├── About_Mobile.png              # Screenshot: Reserves view on mobile viewport
-├── About_Tablet.png              # Screenshot: Reserves view on tablet viewport
-├── Event_Desktop.png             # Screenshot: Event view on desktop viewport
-├── Event_Mobile.png              # Screenshot: Event view on mobile viewport
-├── Event_Tablet.png              # Screenshot: Event view on tablet viewport
+├── index.html                    # Main SPA — Home, Reserves, Market Live, Event views
+├── login.html                    # Research Desk access & authentication portal
+├── app.js                        # All client-side logic: routing, live data, forms, physics
+├── style.css                     # Design system: tokens, components, animations, responsive
+├── vercel.json                   # API route rewrites for Vercel deployment
+│
 ├── api/
-│   ├── gold.js                   # Serverless function: Spot price provider with fallback logic
-│   ├── register.js               # Serverless function: Order & event registration handler
-│   └── subscribe.js              # Serverless function: Newsletter subscription handler
-├── assets/                       # Production WebP visual assets
-│   ├── about_gold_bar.webp       # Physical bullion bar illustration
-│   ├── event_mountain.webp       # Golden mountain peak landscape
-│   ├── footer_gold.webp          # Footer ambient graphic asset
-│   ├── gold_bars_sand.webp       # Vault bullion presentation asset
-│   ├── golden_rays.webp          # Atmospheric lighting overlay
-│   └── home_hero_iceberg.webp    # Gold iceberg summit visual
-└── images/                       # High-resolution source assets and reference layout captures
-    ├── golden_mountain.jpg
-    ├── gold_arrow.jpg
-    ├── gold_bar.jpg
-    ├── gold_sand.jpg
-    ├── hero_iceberg.jpg
-    ├── molten_gold.jpg
-    ├── sunburst.jpg
-    └── references/               # UI layout reference captures
+│   ├── gold.js                   # GET /api/gold — Spot price (GoldAPI.io → Binance fallback)
+│   ├── register.js               # POST /api/register — Allocation/race order handler
+│   └── subscribe.js              # POST /api/subscribe — Newsletter subscription handler
+│
+├── assets/                       # Optimised WebP visuals used in production
+│   ├── home_hero_iceberg.webp    # Home view hero image
+│   ├── about_gold_bar.webp       # Reserves view hero image
+│   ├── event_mountain.webp       # Market Live & Event views hero image
+│   ├── gold_bars_sand.webp       # Home — $30K allocation card background
+│   ├── golden_rays.webp          # Atmospheric overlay asset
+│   └── footer_gold.webp          # Footer visual
+│
+├── images/                       # High-resolution source images
+│   ├── hero_iceberg.jpg
+│   ├── gold_bar.jpg
+│   ├── gold_sand.jpg
+│   ├── golden_mountain.jpg
+│   ├── molten_gold.jpg
+│   ├── gold_arrow.jpg
+│   ├── sunburst.jpg
+│   └── references/               # UI reference layout captures
+│       ├── mobile_home.png
+│       ├── mobile_specs.png
+│       ├── mobile_timeline.png
+│       ├── tablet_home.png
+│       ├── tablet_specs.png
+│       └── tablet_timeline.png
+│
+├── Home_Desktop.png              # Screenshot — Home view, desktop
+├── Home_Tablet.png               # Screenshot — Home view, tablet
+├── Home_Mobile.png               # Screenshot — Home view, mobile
+├── About_Desktop.png             # Screenshot — Reserves view, desktop
+├── About_Tablet.png              # Screenshot — Reserves view, tablet
+├── About_Mobile.png              # Screenshot — Reserves view, mobile
+├── Event_Desktop.png             # Screenshot — Event view, desktop
+├── Event_Tablet.png              # Screenshot — Event view, tablet
+├── Event_Mobile.png              # Screenshot — Event view, mobile
+└── README.md
 ```
 
 ---
 
-## 8. Installation & Setup
+## 08. Installation & Setup
 
 ### Prerequisites
-- Modern web browser (Chrome, Firefox, Safari, Edge)
-- Optional: [Node.js](https://nodejs.org/) (v18+) or [Python 3](https://www.python.org/) for local web serving
-- Optional: [Vercel CLI](https://vercel.com/cli) to test serverless API routes locally
-
-### Local Setup Instructions
-
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/samuelmichaelalva/frostbite.git
-   cd frostbite
-   ```
-
-2. **Run a local static server**:
-   
-   *Option A: Python 3 built-in HTTP server*
-   ```bash
-   python -m http.server 8000
-   ```
-
-   *Option B: Node.js static serve*
-   ```bash
-   npx -y serve .
-   ```
-
-   *Option C: Vercel CLI (executes both static frontend and `/api/*` serverless routes)*
-   ```bash
-   npx -y vercel dev
-   ```
-
-3. **Access the application**:
-   Open `http://localhost:8000` (or the URL output by Vercel CLI) in your browser.
+* Any modern browser (Chrome 90+, Firefox 88+, Safari 14+, Edge 90+)
+* **Optional** for local development: [Python 3](https://python.org) or [Node.js v18+](https://nodejs.org)
+* **Optional** for serverless API routes: [Vercel CLI](https://vercel.com/cli)
 
 ---
 
-### API Route Reference
-
-The application contains three serverless API functions located in `/api`:
-
-#### 1. `GET /api/gold`
-Retrieves the latest spot price for gold.
-- **Headers**:
-  - `Access-Control-Allow-Origin: *`
-  - `Cache-Control: s-maxage=60, stale-while-revalidate=120`
-- **Response** (`200 OK`):
-  ```json
-  {
-    "price": 2748.60,
-    "currency": "USD",
-    "unit": "troy oz",
-    "change24h": "+0.62%",
-    "raisedUsd": 30000,
-    "goldEquivalent": {
-      "oz": "10.91",
-      "grams": "339.4"
-    },
-    "updatedAt": "2026-10-29T00:00:00.000Z"
-  }
-  ```
-
-#### 2. `POST /api/register`
-Processes allocation orders and event registrations.
-- **Request Body**:
-  ```json
-  {
-    "name": "Jane Doe",
-    "email": "jane@example.com",
-    "participationType": "10 Troy Ounces (~$27,500)"
-  }
-  ```
-- **Response** (`200 OK`):
-  ```json
-  {
-    "success": true,
-    "message": "Registration confirmed",
-    "cloudSynced": false,
-    "emailSent": false
-  }
-  ```
-
-#### 3. `POST /api/subscribe`
-Registers an email address for market updates.
-- **Request Body**:
-  ```json
-  {
-    "email": "investor@example.com"
-  }
-  ```
-- **Response** (`200 OK`):
-  ```json
-  {
-    "success": true,
-    "message": "Subscribed",
-    "cloudSynced": false,
-    "emailSent": false
-  }
-  ```
+### Step 1: Clone the Repository
+```bash
+git clone https://github.com/samuelmichaelalva/frostbite.git
+cd frostbite
+```
 
 ---
 
-### Environment Variables
+### Step 2: Serve Locally
 
-Environment variables are optional. When omitted, the platform falls back to public API feeds and browser local storage.
+The frontend requires no build step. Choose any static server:
 
-| Variable | Target Service | Purpose | Requirement |
-| :--- | :--- | :--- | :--- |
-| `GOLD_API_KEY` | GoldAPI.io | Access token for premium spot gold pricing in `/api/gold` | Optional (defaults to Binance public feed) |
-| `RESEND_API_KEY` | Resend.com | API key for sending transactional confirmation emails | Optional (submissions save locally if omitted) |
-| `SUPABASE_URL` | Supabase | HTTPS URL for Supabase cloud database instance | Optional (enables remote database storage) |
-| `SUPABASE_KEY` | Supabase | Anon or service role API key for Supabase authentication | Optional (enables remote database storage) |
+**Option A — Python 3 (simplest)**
+```bash
+python -m http.server 8000
+```
 
----
+**Option B — Node.js**
+```bash
+npx -y serve .
+```
 
-## 9. Team & Contributions
+**Option C — Vercel CLI (recommended — also runs `/api/*` serverless functions)**
+```bash
+npx -y vercel dev
+```
 
-Frostbite was conceived and submitted as a project for **HackInHills 2026** by a three-member team.
+Then open `http://localhost:8000` (or the Vercel dev URL) in your browser.
 
-### Primary Implementation & Technical Leadership
-- **Samuel Michael Alva** — **Team Lead**
-  - **Architecture & Frontend Engineering**: Designed and developed the zero-framework SPA structure, CSS token architecture, responsive design across mobile/tablet/desktop, and view-switching logic.
-  - **Live Market Integration**: Engineered the Binance `PAXGUSDT` public API integration, multi-commodity ratio derivation logic, auto-polling engine, and live converter calculations.
-  - **Backend Serverless Development**: Authored all serverless backend functions (`/api/gold`, `/api/register`, `/api/subscribe`) including fallback mechanisms, Supabase REST database integrations, and Resend email handling.
-  - **Interaction Design & Portal**: Built the 3D card tilt physics, pointer-follow lighting effects, modal dialog workflows, and the research desk authentication interface (`login.html`).
-  - **Git & Repository Management**: Verified as the sole committer and author across all repository commits and technical milestones.
-
-### Team Contributions
-- **HackInHills 2026 Team Members**:
-  - Contributed to competitive hackathon ideation, problem definition surrounding precious metals custody and commodity derivative friction, and the creation of project presentation assets (Slide Deck and Pitch Video).
-  - *Codebase Note*: All technical implementation, code commits, serverless functions, and software maintenance in this repository were authored directly by the Team Lead.
+> The live gold price feed works without any configuration — the app queries Binance's public API directly from the browser. Serverless functions are only needed if you want email dispatch or cloud database writes.
 
 ---
 
-## 10. Limitations
+### Step 3: Configure Environment Variables (Optional)
 
-To ensure transparency, the following technical and functional boundaries apply to this prototype:
+If deploying to Vercel and you want email and database features enabled, add these in your Vercel project dashboard under **Settings → Environment Variables**:
 
-1. **Derived Commodity Prices**:
-   - Only Gold (XAU) reflects real-time exchange pricing (via Binance `PAXGUSDT`).
-   - Silver (XAG), Platinum (XPT), and Palladium (XPD) values are **mathematically derived estimates** based on historical baseline ratios (85:1, 2.8:1, and 2.6:1), not independent live feeds.
-2. **Prototype Transaction Scope**:
-   - The platform does not execute real monetary transactions, bank transfers, payment gateway checkouts, or legal bullion title transfers. All allocation workflows are demonstrations.
-3. **Data Persistence Fallback**:
-   - Without configured `SUPABASE_URL` and `SUPABASE_KEY` environment variables, registrations and subscriptions exist solely within the user's browser `localStorage`. Clearing cache or switching devices removes saved records.
-4. **Conditional Email Dispatch**:
-   - Transactional confirmation emails require a valid `RESEND_API_KEY` and verified sender domain. Without this key, email dispatch is disabled and reported as simulated in the API response.
-5. **Tokenized Gold Basis**:
-   - The public market feed tracks PAX Gold (`PAXG`), which trades on crypto exchange order books. While backed 1:1 by physical allocated gold, slight premiums or discounts relative to the London Bullion Market Association (LBMA) PM fix can occur during extreme volatility.
+| Variable | Service | Purpose |
+| :--- | :--- | :--- |
+| `GOLD_API_KEY` | GoldAPI.io | Premium gold spot data in `/api/gold` (Binance is the default if omitted) |
+| `RESEND_API_KEY` | Resend.com | Transactional email dispatch from `/api/register` and `/api/subscribe` |
+| `SUPABASE_URL` | Supabase | Cloud PostgreSQL instance URL |
+| `SUPABASE_KEY` | Supabase | Anon or service role key for Supabase REST API |
+
+---
+
+## 09. API Reference
+
+All three API functions are Vercel Serverless Functions (Node.js ES Modules).
+
+---
+
+### `GET /api/gold`
+
+Returns the current gold spot price with an equivalent troy oz/gram calculation against a fixed $30,000 reference.
+
+**Response Headers:**
+```
+Access-Control-Allow-Origin: *
+Cache-Control: s-maxage=60, stale-while-revalidate=120
+```
+
+**Response Body (200 OK):**
+```json
+{
+  "price": 2748.60,
+  "currency": "USD",
+  "unit": "troy oz",
+  "change24h": "+0.62%",
+  "raisedUsd": 30000,
+  "goldEquivalent": {
+    "oz": "10.91",
+    "grams": "339.4"
+  },
+  "updatedAt": "2026-10-29T00:00:00.000Z"
+}
+```
+
+**Data source fallback chain:**
+1. `GoldAPI.io` — if `GOLD_API_KEY` env var is set
+2. `Binance PAXGUSDT` — public ticker, no key required
+3. Hardcoded baseline (`$2748.60`) with `±1` jitter — if all network calls fail
+
+---
+
+### `POST /api/register`
+
+Handles bullion allocation inquiries and race event registrations.
+
+**Request Body (application/json):**
+```json
+{
+  "name": "Jane Doe",
+  "email": "jane@example.com",
+  "participationType": "10 Troy Ounces (~$27,500)"
+}
+```
+
+**Response Body (200 OK):**
+```json
+{
+  "success": true,
+  "message": "Registration confirmed",
+  "cloudSynced": false,
+  "emailSent": false
+}
+```
+
+**Backend actions (each conditional on env vars):**
+1. `POST {SUPABASE_URL}/rest/v1/registrations` — if Supabase configured
+2. `POST https://api.resend.com/emails` — if Resend configured; sends confirmation to `email`
+
+---
+
+### `POST /api/subscribe`
+
+Registers an email address for market price alerts and event updates.
+
+**Request Body (application/json):**
+```json
+{
+  "email": "investor@example.com"
+}
+```
+
+**Response Body (200 OK):**
+```json
+{
+  "success": true,
+  "message": "Subscribed",
+  "cloudSynced": false,
+  "emailSent": false
+}
+```
+
+**Backend actions (each conditional on env vars):**
+1. `POST {SUPABASE_URL}/rest/v1/subscribers` — if Supabase configured
+2. `POST https://api.resend.com/emails` — if Resend configured; sends welcome email
+
+---
+
+## 10. Environment Variables
+
+All environment variables are optional. The application functions fully in prototype mode without any configuration.
+
+| Variable | Required | Default Behaviour When Absent |
+| :--- | :---: | :--- |
+| `GOLD_API_KEY` | No | `/api/gold` falls back to Binance public ticker |
+| `RESEND_API_KEY` | No | Emails are not sent; `emailSent: false` returned |
+| `SUPABASE_URL` | No | Submissions not persisted to cloud; `cloudSynced: false` returned |
+| `SUPABASE_KEY` | No | Required alongside `SUPABASE_URL` for database writes |
+
+> Without any environment variables, the gold price feeds live from Binance, and all form data is persisted to `localStorage` only.
+
+---
+
+## 11. Team & Contributions
+
+Frostbite was built as a HackInHills 2026 prototype by a three-member team.
+
+---
+
+### Core Team
+
+**Samuel Michael Alva — Team Lead & Lead Engineer**
+
+Samuel designed and implemented the entire technical architecture of Frostbite. His contributions span every layer of the codebase, as verified by the repository commit history:
+
+* **SPA Architecture & Frontend Engineering** — Designed the zero-framework SPA structure in `index.html` and `app.js`: view-panel layout, `switchView()` DOM router, CSS transition system, and all four application views (Home, Reserves, Market Live, Event).
+* **Live Market Integration** — Engineered the Binance `PAXGUSDT` public API integration, the multi-tier fallback chain (browser → `/api/gold` → baseline), the 45-second auto-polling engine, and the derived multi-commodity ratio calculation system.
+* **Gold Value Calculator** — Implemented the real-time USD → troy oz → gram conversion system wired to the live spot price.
+* **Interaction Design** — Built the pointer-follow ambient radial glow, 3D card tilt physics, spring-physics CSS easing system, and the context-aware modal dialog.
+* **Vercel Serverless Backend** — Authored all three serverless API functions (`api/gold.js`, `api/register.js`, `api/subscribe.js`) including the GoldAPI/Binance data source fallback, Supabase REST integration, and Resend email dispatch.
+* **Research Desk Portal** — Designed and built the standalone `login.html` authentication portal with Tailwind CSS, JetBrains Mono typography, and dynamic form-state toggling.
+* **CSS Design System** — Authored `style.css`: CSS custom property tokens, responsive hero layouts, commodity grid, timeline, modal, and footer components.
+* **Mobile Responsiveness** — Fixed viewport locking, eliminated horizontal overflow, and ensured layout integrity across mobile, tablet, and desktop viewports.
+* **Repository Management** — Sole committer across all technical commits; authored all feature branches and documentation.
+
+---
+
+**Vasanth Augustine Nadar — Hackathon Team Member**
+
+Vasanth contributed to the ideation phase and collaborative problem definition at HackInHills 2026. The team's shared research into commodity derivatives accessibility and the platform's dual-use concept (asset intelligence + community fundraising) reflects group-level input during the hackathon.
+
+---
+
+**Sidra Zulfikar Dingankar — Hackathon Team Member**
+
+Sidra contributed to the ideation phase, project scoping, and the creation of presentation assets submitted for the hackathon. The team's framing of the problem statement around institutional gold access and community fundraising reflects collaborative discussion during the hackathon period.
+
+---
+
+> **Codebase note:** All technical implementation — source code, serverless functions, CSS, assets, and documentation — was authored by Samuel Michael Alva, as verified by the Git commit history (`git log --all --format="%an | %s"`). No code contributions from other team members are present in the repository.
+
+---
+
+## 12. Project Resources
+
+| Resource | Link |
+| :--- | :--- |
+| **LinkedIn Pitch Video** | [Watch on LinkedIn](https://lnkd.in/p/djbNYUpr) |
+| **Prototype Demonstration** | [View on Google Drive](https://drive.google.com/file/d/1OSgYeKWHo8GKuMF1qOdHjajBJ38n4lEd/view?usp=drivesdk) |
+| **Project Presentation (PPT)** | [View on Google Drive](https://drive.google.com/file/d/1ea4lmIMMOzRFWw52CDiPqJ2Ktl1lycLx/view?usp=drivesdk) |
+| **Live Application** | [frostbite-taupe.vercel.app](https://frostbite-taupe.vercel.app) |
+| **Source Code** | [github.com/samuelmichaelalva/frostbite](https://github.com/samuelmichaelalva/frostbite) |
+
+---
+
+## 13. Prototype Limitations
+
+Frostbite is a hackathon prototype. The following boundaries apply:
+
+1. **Derived Commodity Prices** — Only Gold (XAU) is sourced from a live exchange feed (Binance PAXGUSDT). Silver (XAG), Platinum (XPT), and Palladium (XPD) values are computed using static ratio multipliers — they are approximations, not independent live feeds. This is disclosed in the UI.
+
+2. **No Real Transactions** — The allocation workflow is a demonstration. No payment processing, real financial settlement, or legal title transfer occurs. Orders are saved to `localStorage` or a Supabase table, nothing more.
+
+3. **Local Storage Fallback** — Without Supabase configured, all form submissions exist only in the submitting user's browser `localStorage`. Clearing browser data or switching devices loses all saved records.
+
+4. **Email Dispatch Requires Configuration** — Transactional confirmation emails only send when a valid `RESEND_API_KEY` with a verified sender domain is configured on Vercel. Without this, `emailSent: false` is returned.
+
+5. **PAXG/XAU Basis Risk** — PAX Gold (PAXG) trades on crypto exchange order books and can deviate slightly from the LBMA PM fix during periods of extreme volatility or low liquidity, as it reflects exchange-specific supply and demand.
+
+6. **Physical Gold Claims are Illustrative** — References to Zurich/Singapore vaults, LBMA 999.9 custody, Lloyd's insurance, and quarterly Big-Four audits describe the platform's intended product concept, not actual operational infrastructure.
+
+---
+
+<div align="center">
+  <sub>Built for HackInHills 2026 · Team Frostbite</sub>
+</div>
