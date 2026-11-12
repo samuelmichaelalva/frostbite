@@ -16,6 +16,18 @@
 
 ---
 
+## 🔗 Project Resources & Links
+
+| Resource | Link | Description |
+| :--- | :--- | :--- |
+| 🎬 **LinkedIn Pitch Video** | [Watch on LinkedIn](https://lnkd.in/p/djbNYUpr) | Competition concept pitch and walkthrough |
+| 🖥️ **Prototype Demonstration** | [View Video Demo (Google Drive)](https://drive.google.com/file/d/1OSgYeKWHo8GKuMF1qOdHjajBJ38n4lEd/view?usp=drivesdk) | Screen capture demonstration of live application |
+| 📊 **Project Presentation (PPT)** | [View Slides (Google Drive)](https://drive.google.com/file/d/1ea4lmIMMOzRFWw52CDiPqJ2Ktl1lycLx/view?usp=drivesdk) | HackInHills 2026 official pitch deck |
+| 🌐 **Live Web Application** | [frostbite-taupe.vercel.app](https://frostbite-taupe.vercel.app) | Production deployment hosted on Vercel |
+| 🐙 **Source Code Repository** | [github.com/samuelmichaelalva/frostbite](https://github.com/samuelmichaelalva/frostbite) | Public GitHub repository |
+
+---
+
 ## 📑 Project Details
 
 | Parameter | Specification |
@@ -31,6 +43,7 @@
 
 ## Table of Contents
 
+* [Project Resources & Links](#-project-resources--links)
 * [01. Project Overview](#01-project-overview)
 * [02. Problem Statement & Solution](#02-problem-statement--solution)
 * [03. Key Features](#03-key-features)
@@ -42,8 +55,7 @@
 * [09. API Reference](#09-api-reference)
 * [10. Environment Variables](#10-environment-variables)
 * [11. Team & Contributions](#11-team--contributions)
-* [12. Project Resources](#12-project-resources)
-* [13. Prototype Limitations](#13-prototype-limitations)
+* [12. Prototype Limitations](#12-prototype-limitations)
 
 ---
 
@@ -495,19 +507,7 @@ Sidra contributed to the ideation phase, project scoping, and the creation of pr
 
 ---
 
-## 12. Project Resources
-
-| Resource | Link |
-| :--- | :--- |
-| **LinkedIn Pitch Video** | [Watch on LinkedIn](https://lnkd.in/p/djbNYUpr) |
-| **Prototype Demonstration** | [View on Google Drive](https://drive.google.com/file/d/1OSgYeKWHo8GKuMF1qOdHjajBJ38n4lEd/view?usp=drivesdk) |
-| **Project Presentation (PPT)** | [View on Google Drive](https://drive.google.com/file/d/1ea4lmIMMOzRFWw52CDiPqJ2Ktl1lycLx/view?usp=drivesdk) |
-| **Live Application** | [frostbite-taupe.vercel.app](https://frostbite-taupe.vercel.app) |
-| **Source Code** | [github.com/samuelmichaelalva/frostbite](https://github.com/samuelmichaelalva/frostbite) |
-
----
-
-## 13. Prototype Limitations
+## 12. Prototype Limitations
 
 Frostbite is a hackathon prototype. The following boundaries apply:
 
