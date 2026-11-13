@@ -469,41 +469,14 @@ All environment variables are optional. The application functions fully in proto
 
 ## 11. Team & Contributions
 
-Frostbite was built as a HackInHills 2026 prototype by a three-member team.
+Frostbite was developed for **HackInHills 2026** by a three-member team:
 
----
-
-### Core Team
-
-**Samuel Michael Alva — Team Lead & Lead Engineer**
-
-Samuel designed and implemented the entire technical architecture of Frostbite. His contributions span every layer of the codebase, as verified by the repository commit history:
-
-* **SPA Architecture & Frontend Engineering** — Designed the zero-framework SPA structure in `index.html` and `app.js`: view-panel layout, `switchView()` DOM router, CSS transition system, and all four application views (Home, Reserves, Market Live, Event).
-* **Live Market Integration** — Engineered the Binance `PAXGUSDT` public API integration, the multi-tier fallback chain (browser → `/api/gold` → baseline), the 45-second auto-polling engine, and the derived multi-commodity ratio calculation system.
-* **Gold Value Calculator** — Implemented the real-time USD → troy oz → gram conversion system wired to the live spot price.
-* **Interaction Design** — Built the pointer-follow ambient radial glow, 3D card tilt physics, spring-physics CSS easing system, and the context-aware modal dialog.
-* **Vercel Serverless Backend** — Authored all three serverless API functions (`api/gold.js`, `api/register.js`, `api/subscribe.js`) including the GoldAPI/Binance data source fallback, Supabase REST integration, and Resend email dispatch.
-* **Research Desk Portal** — Designed and built the standalone `login.html` authentication portal with Tailwind CSS, JetBrains Mono typography, and dynamic form-state toggling.
-* **CSS Design System** — Authored `style.css`: CSS custom property tokens, responsive hero layouts, commodity grid, timeline, modal, and footer components.
-* **Mobile Responsiveness** — Fixed viewport locking, eliminated horizontal overflow, and ensured layout integrity across mobile, tablet, and desktop viewports.
-* **Repository Management** — Sole committer across all technical commits; authored all feature branches and documentation.
-
----
-
-**Vasanth Augustine Nadar — Hackathon Team Member**
-
-Vasanth contributed to the ideation phase and collaborative problem definition at HackInHills 2026. The team's shared research into commodity derivatives accessibility and the platform's dual-use concept (asset intelligence + community fundraising) reflects group-level input during the hackathon.
-
----
-
-**Sidra Zulfikar Dingankar — Hackathon Team Member**
-
-Sidra contributed to the ideation phase, project scoping, and the creation of presentation assets submitted for the hackathon. The team's framing of the problem statement around institutional gold access and community fundraising reflects collaborative discussion during the hackathon period.
-
----
-
-> **Codebase note:** All technical implementation — source code, serverless functions, CSS, assets, and documentation — was authored by Samuel Michael Alva, as verified by the Git commit history (`git log --all --format="%an | %s"`). No code contributions from other team members are present in the repository.
+* **Samuel Michael Alva** — *Team Lead*  
+  System architecture, frontend SPA implementation, Binance live data integration, and serverless API endpoints.
+* **Vasanth Augustine Nadar** — *Research & Testing*  
+  Problem domain research, commodity derivatives analysis, and prototype testing.
+* **Sidra Zulfikar Dingankar** — *Design & Presentation*  
+  Product ideation, UX concept framing, and presentation deck development.
 
 ---
 
